@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <url>
+    <loc>https://sartevo.com/</loc>
+    <lastmod>2026-09-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sartevo.com/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://sartevo.com/index-ar.html" />
+  </url>
+
+  <url>
+    <loc>https://sartevo.com/index-ar.html</loc>
+    <lastmod>2026-09-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sartevo.com/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://sartevo.com/index-ar.html" />
+  </url>
+
+  <url>
+    <loc>https://sartevo.com/privacy.html</loc>
+    <lastmod>2026-09-06</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sartevo.com/privacy.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://sartevo.com/privacy-ar.html" />
+  </url>
+
+  <url>
+    <loc>https://sartevo.com/privacy-ar.html</loc>
+    <lastmod>2026-09-06</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sartevo.com/privacy.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://sartevo.com/privacy-ar.html" />
+  </url>
+
+  <url>
+    <loc>https://sartevo.com/terms.html</loc>
+    <lastmod>2026-09-06</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sartevo.com/terms.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://sartevo.com/terms-ar.html" />
+  </url>
+
+  <url>
+    <loc>https://sartevo.com/terms-ar.html</loc>
+    <lastmod>2026-09-06</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sartevo.com/terms.html" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://sartevo.com/terms-ar.html" />
+  </url>
+
+</urlset>
