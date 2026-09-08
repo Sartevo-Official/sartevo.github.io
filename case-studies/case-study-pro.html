@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23BF3A00'/%3E%3Ctext x='32' y='45' font-family='Arial, sans-serif' font-size='38' font-weight='800' fill='white' text-anchor='middle'%3ES%3C/text%3E%3C/svg%3E" />
+<title>Sartevo — Pro Revenue System · محاكاة بصرية كاملة</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root{
+  --ink:#1A1A1A; --ink-soft:#4a5568; --muted:#7b8794;
+  --line:#dde3ea; --line-soft:#e9edf2;
+  --paper:#ffffff; --panel:#f6f8fa;
+  --brand:#BF3A00; --brand-2:#A83200; --accent:#BF3A00;
+  --page-bg:#FAFAF7;
+  --wa:#25D366; --wa-dark:#128C7E; --wa-bubble:#dcf8c6; --wa-chat-bg:#e5ddd5;
+  --sec:#1A1A1A; --err:#c0392b; --gs:#0f9d58; --mail:#3b6fa0; --ai:#6a4fb0; --success:#0f9d58; --success-bg:#e8f5ee;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{background:var(--page-bg);font-family:'Cairo','Inter',sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+.ltr,.en{direction:ltr;unicode-bidi:isolate;font-family:'Inter',sans-serif;}
+
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease;}
+.reveal.in{opacity:1;transform:translateY(0);}
+
+.hero{padding:60px 24px 36px;text-align:center;background:linear-gradient(180deg,#1A1A1A 0%,#000000 100%);color:#fff;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 15% 20%,rgba(191,58,0,0.18),transparent 40%),radial-gradient(circle at 85% 80%,rgba(106,79,176,0.28),transparent 45%);pointer-events:none;}
+.hero-inner{position:relative;max-width:800px;margin:0 auto;}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;font-family:'Inter',sans-serif;font-size:11px;letter-spacing:.12em;color:#FF8A5C;text-transform:uppercase;font-weight:700;border:1px solid rgba(255,138,92,0.4);border-radius:999px;padding:6px 16px;margin-bottom:20px;}
+.hero-logo{font-family:'Inter',sans-serif;font-size:32px;font-weight:800;letter-spacing:-0.02em;margin:0 auto 18px;background:linear-gradient(to bottom,#ffffff,#FF8A5C);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;}
+.hero h1{font-size:27px;font-weight:700;margin:8px 0 10px;line-height:1.45;}
+.hero .en-sub{font-family:'Inter',sans-serif;direction:ltr;font-size:12.5px;color:#B8B8B8;letter-spacing:.05em;margin-bottom:16px;}
+.hero p{font-size:15px;color:#C9C9C9;line-height:1.85;max-width:620px;margin:0 auto;}
+
+.section{max-width:1480px;margin:0 auto;padding:44px 24px;}
+.section-head{text-align:center;margin-bottom:30px;}
+.section-badge{width:34px;height:34px;border-radius:50%;margin:0 auto 12px;background:var(--brand);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Inter',sans-serif;font-weight:800;font-size:13px;}
+.section-title{font-size:18px;font-weight:700;color:var(--brand);margin-bottom:5px;}
+.section-sub{font-size:13px;color:var(--muted);}
+.section.alt{background:var(--paper);border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);}
+
+.card{background:var(--paper);border-radius:16px;box-shadow:0 10px 34px rgba(15,25,40,0.09);overflow:hidden;border:1px solid var(--line-soft);}
+
+.step1-wrap{display:flex;justify-content:center;}
+.fb-mock{width:100%;max-width:340px;position:relative;}
+.fb-topbar{background:#f0f2f5;padding:9px 14px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--line-soft);}
+.fb-dot{width:8px;height:8px;border-radius:50%;}
+.fb-dot.r{background:#ff5f57;} .fb-dot.y{background:#febc2e;} .fb-dot.g{background:#28c840;}
+.fb-brand{padding:14px 16px 4px;display:flex;align-items:center;gap:8px;}
+.fb-avatar{width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,#000000,#BF3A00);flex:0 0 auto;}
+.fb-brand-name{font-family:'Inter',sans-serif;font-size:12.5px;font-weight:700;color:var(--ink);}
+.fb-brand-sub{font-family:'Inter',sans-serif;font-size:9.5px;color:var(--muted);}
+.fb-ad-copy{padding:8px 16px 14px;font-size:12.5px;color:var(--ink-soft);line-height:1.7;}
+.fb-form{padding:0 14px 16px;}
+.fb-field{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:9px 12px;margin-bottom:8px;font-family:'Inter',sans-serif;font-size:11.5px;color:var(--ink);}
+.fb-field.msg{font-family:'Cairo','Inter',sans-serif;direction:rtl;font-size:12px;line-height:1.7;}
+.fb-field .fill{color:var(--brand);font-weight:600;}
+.fb-submit{background:var(--brand-2);color:#fff;text-align:center;padding:10px;border-radius:8px;font-family:'Inter',sans-serif;font-size:12px;font-weight:700;margin-top:4px;cursor:pointer;transition:transform .15s ease,box-shadow .15s ease;}
+.fb-submit:hover{transform:translateY(-1px);box-shadow:0 6px 14px rgba(168,50,0,0.35);}
+.sec-badge{position:absolute;top:-12px;left:-12px;background:var(--sec);color:#fff;border-radius:20px;padding:6px 12px 6px 10px;display:flex;align-items:center;gap:5px;font-size:10px;font-weight:700;box-shadow:0 6px 16px rgba(0,0,0,0.35);z-index:2;}
+.step-note{max-width:680px;margin:16px auto 0;text-align:center;font-size:11.5px;color:var(--muted);line-height:1.8;}
+
+.branch-row{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;}
+.branch-card{flex:1;min-width:220px;max-width:340px;background:var(--paper);border-radius:14px;border:1px solid var(--line-soft);padding:16px;box-shadow:0 6px 20px rgba(15,25,40,0.06);transition:transform .2s ease,box-shadow .2s ease;}
+.branch-card:hover{transform:translateY(-3px);box-shadow:0 10px 26px rgba(15,25,40,0.1);}
+.branch-head{display:flex;align-items:flex-start;gap:10px;margin-bottom:10px;}
+.branch-icon{width:28px;height:28px;border-radius:8px;flex:0 0 28px;display:flex;align-items:center;justify-content:center;font-family:'Inter',sans-serif;font-weight:800;font-size:13px;color:#fff;}
+.branch-title-wrap{min-width:0;flex:1;}
+.branch-title{font-size:13px;font-weight:700;color:var(--ink);line-height:1.5;}
+.branch-body{font-size:11.5px;color:var(--ink-soft);line-height:1.8;}
+.branch-body code{background:var(--panel);border-radius:4px;padding:1px 5px;font-family:'Inter',sans-serif;font-size:10px;}
+
+.step-wrap{display:flex;justify-content:center;flex-wrap:wrap;gap:18px;}
+.wa-mock{width:100%;max-width:280px;background:var(--wa-chat-bg);}
+.wa-topbar{background:var(--wa-dark);color:#fff;padding:11px 14px;display:flex;align-items:center;gap:9px;}
+.wa-avatar{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#000000,#BF3A00);display:flex;align-items:center;justify-content:center;font-family:'Inter',sans-serif;font-size:11px;font-weight:800;color:#fff;}
+.wa-name{font-family:'Inter',sans-serif;font-size:12px;font-weight:700;}
+.wa-status{font-family:'Inter',sans-serif;font-size:8.5px;color:#d4ede4;}
+.wa-body{padding:16px 12px;min-height:110px;}
+.wa-bubble{background:var(--wa-bubble);border-radius:10px 10px 2px 10px;padding:9px 11px;font-size:11.5px;line-height:1.75;color:#111;max-width:88%;margin-inline-start:auto;box-shadow:0 1px 1px rgba(0,0,0,0.08);animation:bubbleIn .5s ease both;}
+.wa-bubble.admin{background:#fff;border:1.5px dashed var(--accent);}
+.wa-time{font-family:'Inter',sans-serif;font-size:8.5px;color:#6b8a75;text-align:left;margin-top:3px;}
+.wa-time .tick{transition:color .3s ease;}
+.tpl-tag{display:inline-flex;align-items:center;gap:5px;font-family:'Inter',sans-serif;font-size:9px;font-weight:700;background:#fff8ec;color:#a3701c;border:1px solid #f0dcb0;border-radius:20px;padding:5px 12px;margin-top:14px;}
+@keyframes bubbleIn{from{opacity:0;transform:translateY(6px) scale(.97);}to{opacity:1;transform:translateY(0) scale(1);}}
+
+.email-mock{width:100%;max-width:280px;background:#fff;}
+.email-topbar{background:var(--mail);color:#fff;padding:11px 14px;display:flex;align-items:center;gap:9px;}
+.email-icon{width:28px;height:28px;border-radius:8px;background:rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;font-size:14px;}
+.email-from{font-family:'Inter',sans-serif;font-size:12px;font-weight:700;}
+.email-to{font-family:'Inter',sans-serif;font-size:8.5px;color:#dbe6f0;}
+.email-body{padding:14px 14px 16px;}
+.email-subject{font-size:12px;font-weight:700;color:var(--ink);margin-bottom:8px;line-height:1.6;border-bottom:1px solid var(--line-soft);padding-bottom:8px;}
+.email-text{font-size:11px;line-height:1.8;color:var(--ink-soft);white-space:pre-line;}
+.email-time{font-family:'Inter',sans-serif;font-size:8px;color:var(--muted);text-align:left;margin-top:8px;}
+
+.ai-mock{width:100%;max-width:400px;background:#fff;}
+.ai-topbar{background:linear-gradient(135deg,var(--ai),#493a80);color:#fff;padding:11px 14px;display:flex;align-items:center;gap:9px;}
+.ai-icon{width:28px;height:28px;border-radius:8px;background:rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;font-size:14px;}
+.ai-title{font-family:'Inter',sans-serif;font-size:12px;font-weight:700;}
+.ai-sub{font-family:'Inter',sans-serif;font-size:8.5px;color:#e2dbf5;}
+.ai-body{padding:16px;}
+.ai-input-label{font-family:'Inter',sans-serif;font-size:8.5px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px;}
+.ai-input-box{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:10px 12px;font-size:11.5px;line-height:1.7;color:var(--ink-soft);margin-bottom:14px;}
+.ai-output-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;}
+.ai-output-item{background:#f7f4fc;border:1px solid #e2d9f5;border-radius:8px;padding:10px 12px;}
+.ai-output-label{font-family:'Inter',sans-serif;font-size:8px;font-weight:700;color:var(--ai);text-transform:uppercase;letter-spacing:.03em;margin-bottom:4px;}
+.ai-output-value{font-size:13px;font-weight:800;color:var(--ink);}
+.ai-output-value.score{font-family:'Inter',sans-serif;}
+.ai-analysis-box{background:#f7f4fc;border:1px solid #e2d9f5;border-radius:8px;padding:10px 12px;font-size:11px;line-height:1.75;color:var(--ink-soft);}
+.ai-analysis-box b{color:var(--ai);}
+
+.fork-card .fork-icon{width:32px;height:32px;border-radius:9px;flex:0 0 32px;display:flex;align-items:center;justify-content:center;font-family:'Inter',sans-serif;font-weight:800;font-size:14px;color:#fff;}
+.branch-row.stacked{flex-direction:column;align-items:stretch;max-width:900px;margin:0 auto;}
+.branch-row.stacked .branch-card{max-width:none;width:100%;}
+
+.mini-snap{margin-top:16px;}
+.mini-snap-label{font-family:'Inter',sans-serif;font-size:8.5px;font-weight:700;color:var(--muted);letter-spacing:.04em;text-transform:uppercase;margin-bottom:8px;text-align:center;}
+.db-base{max-width:100%;margin:0 auto;background:var(--paper);border:1px solid var(--line-soft);border-radius:14px;overflow:hidden;box-shadow:0 8px 26px rgba(15,25,40,0.08);}
+.db-base-header{background:linear-gradient(135deg,#1A1A1A,#000000);color:#fff;padding:11px 16px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px;}
+.db-base-header.noco{background:linear-gradient(135deg,#2b2f77,#1a1c4a);}
+.db-base-name{font-family:'Inter',sans-serif;font-size:12px;font-weight:700;letter-spacing:.01em;}
+.db-base-sub{font-family:'Inter',sans-serif;font-size:8.5px;color:#b7c8d4;}
+
+.at-tabs{direction:ltr;display:flex;overflow-x:auto;background:var(--panel);border-bottom:1px solid var(--line);}
+.at-tab{padding:8px 12px;font-family:'Inter',sans-serif;font-size:8.5px;font-weight:700;white-space:nowrap;color:var(--muted);border-bottom:2px solid transparent;}
+.at-tab.active{background:#fff;color:var(--brand-2);border-bottom:2px solid var(--brand-2);}
+
+.at-grid-wrap{direction:ltr;background:#fff;width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+table.at-grid.wide{min-width:820px;}
+table.at-grid:not(.wide){min-width:480px;}
+table.at-grid{border-collapse:collapse;font-family:'Inter',sans-serif;width:100%;table-layout:fixed;}
+table.at-grid.wide th,table.at-grid.wide td{padding:5px 3px;font-size:6.2px;}
+table.at-grid th{background:#f7f8fa;color:#6b7684;font-weight:600;text-align:left;padding:6px 4px;font-size:6.6px;line-height:1.25;border-bottom:1px solid var(--line);border-right:1px solid var(--line-soft);white-space:normal;word-break:break-word;vertical-align:bottom;}
+table.at-grid th:last-child,table.at-grid td:last-child{border-right:none;}
+table.at-grid td{padding:6px 4px;font-size:8px;color:var(--ink);border-bottom:1px solid var(--line-soft);border-right:1px solid var(--line-soft);white-space:normal;word-break:break-word;background:#fff;text-align:left;}
+table.at-grid td:first-child{font-weight:600;}
+table.at-grid tr:last-child td{border-bottom:none;}
+table.at-grid td.changed{box-shadow:inset 0 0 0 2px var(--accent);background:#fffaf0;font-weight:700;border-radius:3px;position:relative;}
+table.at-grid td.changed-ai{box-shadow:inset 0 0 0 2px var(--ai);background:#f7f4fc;font-weight:700;border-radius:3px;position:relative;}
+.chk{display:inline-flex;width:16px;height:16px;border-radius:4px;align-items:center;justify-content:center;font-size:10px;font-weight:800;}
+.chk.yes{background:var(--success-bg);color:var(--success);}
+.chk.no{background:var(--line-soft);color:var(--muted);}
+.at-pill{display:inline-block;font-family:'Inter',sans-serif;font-size:7.5px;font-weight:700;padding:2px 5px;border-radius:20px;white-space:nowrap;}
+.at-pill.pending{background:#fdecc8;color:#a3701c;}
+.at-pill.delivered{background:var(--success-bg);color:var(--success);}
+.at-pill.empty{color:var(--muted);font-weight:400;}
+.at-pill.high{background:#fbe4e2;color:var(--err);}
+.at-pill.medium{background:#fdecd8;color:#a05a15;}
+.at-pill.low{background:#e4f1eb;color:var(--brand-2);}
+.at-caption{padding:9px 14px;font-size:10.5px;color:var(--ink-soft);line-height:1.8;border-top:1px solid var(--line-soft);background:var(--panel);}
+.at-caption + .at-caption{border-top:1px dashed var(--line-soft);}
+.at-caption b{color:var(--brand);}
+
+.gs-mock{width:100%;max-width:520px;margin:0 auto;}
+.gs-topbar{background:#f0f2f5;padding:10px 14px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--line-soft);}
+.gs-icon{width:20px;height:20px;border-radius:4px;background:var(--gs);flex:0 0 auto;display:flex;align-items:center;justify-content:center;color:#fff;font-family:'Inter',sans-serif;font-weight:800;font-size:11px;}
+.gs-name{font-family:'Inter',sans-serif;font-size:11.5px;font-weight:700;color:var(--ink);}
+.gs-tabs{display:flex;gap:6px;padding:8px 14px 0;flex-wrap:wrap;}
+.gs-tab{font-family:'Inter',sans-serif;font-size:8.5px;font-weight:700;padding:5px 9px;border-radius:6px 6px 0 0;background:var(--panel);color:var(--muted);}
+.gs-tab.active{background:#fff;color:var(--brand-2);box-shadow:0 -1px 0 var(--brand-2) inset;}
+table.gs-table{width:100%;border-collapse:collapse;font-family:'Inter',sans-serif;font-size:9.5px;}
+table.gs-table th{background:#f8f9fa;color:var(--muted);font-weight:600;text-align:right;padding:6px 9px;border:1px solid var(--line-soft);font-size:8px;}
+table.gs-table td{padding:6px 9px;border:1px solid var(--line-soft);color:var(--ink-soft);}
+.gs-schedule{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:16px;font-family:'Inter',sans-serif;font-size:11px;color:var(--brand);font-weight:700;text-align:center;}
+
+.close-wrap{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;align-items:stretch;}
+.close-wa{flex:0 0 280px;}
+.close-side{flex:1;min-width:260px;max-width:440px;display:flex;flex-direction:column;justify-content:center;gap:14px;}
+.close-badge{display:inline-flex;align-items:center;gap:8px;font-family:'Inter',sans-serif;font-size:11px;font-weight:700;color:var(--success);background:var(--success-bg);border-radius:20px;padding:6px 14px;width:fit-content;}
+.close-title{font-size:16px;font-weight:700;color:var(--ink);line-height:1.6;}
+.close-body{font-size:12px;color:var(--ink-soft);line-height:1.85;}
+
+.matters{max-width:1150px;margin:0 auto 60px;padding:0 24px;display:flex;gap:20px;flex-wrap:wrap;}
+.matter-card{flex:1;min-width:150px;background:var(--paper);border-radius:14px;padding:20px;border:1px solid var(--line-soft);text-align:center;}
+.matter-num{font-family:'Inter',sans-serif;font-size:22px;font-weight:800;color:var(--brand-2);margin-bottom:5px;}
+.matter-label{font-size:12.5px;color:var(--ink-soft);line-height:1.7;}
+
+.demo-footer{text-align:center;padding:24px 24px 20px;font-family:'Inter',sans-serif;font-size:11px;color:var(--muted);}
+.demo-footer .tag{display:inline-block;background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:6px 18px;margin-bottom:10px;font-weight:600;color:var(--ink-soft);}
+
+.purpose{background:linear-gradient(180deg,#1A1A1A 0%,#000000 100%);color:#fff;padding:54px 24px;}
+.purpose-inner{max-width:860px;margin:0 auto;}
+.purpose-title{font-size:20px;font-weight:700;text-align:center;margin-bottom:8px;}
+.purpose-sub{font-size:13.5px;color:#B8B8B8;text-align:center;margin-bottom:36px;line-height:1.8;max-width:640px;margin-inline:auto;}
+.purpose-grid{display:flex;gap:18px;margin-bottom:34px;flex-wrap:wrap;}
+.purpose-card{flex:1;min-width:200px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:14px;padding:22px 18px;}
+.purpose-num{font-family:'Inter',sans-serif;font-size:12px;font-weight:800;color:#FF8A5C;letter-spacing:.06em;margin-bottom:10px;}
+.purpose-card-title{font-size:14.5px;font-weight:700;margin-bottom:8px;line-height:1.6;}
+.purpose-card-body{font-size:12px;color:#C9C9C9;line-height:1.85;}
+.purpose-note{border-top:1px solid rgba(255,255,255,0.15);padding-top:26px;font-size:14px;color:#D9D9D9;line-height:2;text-align:center;max-width:720px;margin:0 auto;}
+.purpose-note b{color:#fff;}
+.conditions-box{background:rgba(255,255,255,0.04);border:1px solid rgba(255,138,92,0.35);border-radius:14px;padding:26px 28px;margin-top:32px;max-width:760px;margin-inline:auto;}
+.conditions-head{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+.conditions-icon{width:26px;height:26px;border-radius:50%;background:rgba(191,58,0,0.18);border:1px solid rgba(191,58,0,0.5);display:flex;align-items:center;justify-content:center;color:#FF8A5C;font-family:'Inter',sans-serif;font-weight:800;font-size:13px;flex:0 0 auto;}
+.conditions-title{font-size:14px;font-weight:700;color:#fff;}
+.conditions-body{font-size:12.5px;color:#C9C9C9;line-height:2;}
+
+@media (max-width:860px){.purpose-grid{flex-direction:column;} .close-wrap{flex-direction:column;align-items:center;}}
+@media (max-width:860px){.matters{flex-direction:column;} .branch-row{flex-direction:column;align-items:center;}}
+@media (max-width:480px){
+  .hero{padding:44px 18px 28px;}
+  .hero h1{font-size:22px;line-height:1.5;}
+  .hero p{font-size:13.5px;}
+  .hero-logo{font-size:26px;}
+  .section{padding:32px 16px;}
+  .section-title{font-size:16px;}
+  .purpose{padding:40px 18px;}
+  .purpose-title{font-size:18px;}
+  .purpose-card{padding:18px 14px;}
+  .conditions-box{padding:20px 18px;}
+  .close-title{font-size:14.5px;}
+}
+
+@media print{
+  body{background:#fff;}
+  .reveal{opacity:1 !important;transform:none !important;}
+  .section{padding:24px 18px;break-inside:avoid;page-break-inside:avoid;}
+  .hero,.purpose{break-inside:avoid;}
+  .branch-row,.close-wrap,.db-base{break-inside:avoid;}
+  .at-grid-wrap{overflow-x:visible;}
+  table.at-grid{width:100%;}
+  .card,.branch-card,.db-base{box-shadow:none;border:1px solid #ccc;}
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">نموذج توضيحي كامل · <span class="ltr en">Full Visual Demo</span></div>
+    <div class="hero-logo">Sartevo</div>
+    <h1>رحلة عميل محتمل كاملة داخل نظام Pro — من أول ثانية لحد إغلاق الصفقة</h1>
+    <div class="en-sub ltr">Pro Revenue System — Complete Journey Simulation</div>
+    <p>من لحظة استقبال الطلب من أي مصدر بلا حد أقصى، مروراً بتصنيف الذكاء الاصطناعي لنية الشراء، والتوجيه التلقائي حسب الأولوية، والمزامنة مع أنظمتك الخارجية، لحد تأكيد البيع — كل خطوة هنا مطابقة حرفيًا لآلية عمل النظام الفعلية.</p>
+  </div>
+</div>
+
+<!-- ===== 1 ===== -->
+<div class="section reveal">
+  <div class="section-head">
+    <div class="section-badge">١</div>
+    <div class="section-title">عميل محتمل يملا بياناته — برسالة تفصيلية</div>
+    <div class="section-sub ltr">SOURCE · بلا حد أقصى للمصادر</div>
+  </div>
+  <div class="step1-wrap">
+    <div style="position:relative;">
+      <div class="sec-badge">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M12 2L4 5v6c0 5.5 3.4 9.7 8 11 4.6-1.3 8-5.5 8-11V5l-8-3z" fill="currentColor"/></svg>
+        مصدر موثّق فقط
+      </div>
+      <div class="card fb-mock">
+        <div class="fb-topbar"><span class="fb-dot r"></span><span class="fb-dot y"></span><span class="fb-dot g"></span></div>
+        <div class="fb-brand">
+          <div class="fb-avatar"></div>
+          <div><div class="fb-brand-name">عقارات النخبة</div><div class="fb-brand-sub ltr">Sponsored · Facebook</div></div>
+        </div>
+        <div class="fb-ad-copy">شقق تشطيب كامل بالتقسيط — احجز معاينة مجانية اليوم 🏢</div>
+        <div class="fb-form">
+          <div class="fb-field">الاسم: <span class="fill">ياسمين علي</span></div>
+          <div class="fb-field">الموبايل: <span class="ltr">01xxxxxxxxx</span></div>
+          <div class="fb-field">الإيميل: <span class="ltr fill">yasmin@example.com</span></div>
+          <div class="fb-field msg">الرسالة: <span class="fill">عايزة أعرف تفاصيل عن الشقق المتاحة والتقسيط، وحابة أحجز معاينة الأسبوع ده لو ممكن</span></div>
+          <div class="fb-submit">إرسال</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="step-note">باقة Pro بتقبل استقبال من مصادر بلا حد أقصى، وتحديدًا بتحتفظ بنص رسالة العميل الأصلي كامل — وهو اللي هيعتمد عليه تصنيف الذكاء الاصطناعي في الخطوة الجاية. قبل أي معالجة، النظام بيتحقق فورًا إن الطلب جاي من مصدر موثّق ومستقبلها لأول مرة.</div>
+</div>
+
+<!-- ===== 2 ===== -->
+<div class="section alt reveal">
+  <div class="section-head">
+    <div class="section-badge">٢</div>
+    <div class="section-title">النظام بيتأكد إن البيانات كاملة</div>
+    <div class="section-sub ltr">Validate Lead Data</div>
+  </div>
+  <div class="branch-row">
+    <div class="branch-card" style="border-inline-start:3px solid var(--success);">
+      <div class="branch-head"><span class="branch-icon" style="background:var(--success);">✓</span><div class="branch-title-wrap"><div class="branch-title">الاسم والرقم موجودين</div></div></div>
+      <div class="branch-body">يكمل عادي للخطوة الجاية</div>
+    </div>
+    <div class="branch-card" style="border-inline-start:3px solid var(--err);">
+      <div class="branch-head"><span class="branch-icon" style="background:var(--err);">!</span><div class="branch-title-wrap"><div class="branch-title">بيانات ناقصة (الرقم أو الاسم فاضي)</div></div></div>
+      <div class="branch-body">بيتسجل الخطأ فورًا في سجل النشاط، وبيوصل تنبيه لحظي للمطور المسؤول عن النظام عشان يتابعه على طول</div>
+    </div>
+  </div>
+  <div class="step-note">لازم يتوفر الاسم ورقم الهاتف مع بعض عشان أي عميل محتمل يدخل النظام — لو أي بيانات ناقصة، العميل مايتسجلش، والنظام بيبلّغ المطور المسؤول فورًا</div>
+</div>
+
+<!-- ===== 3 ===== -->
+<div class="section reveal">
+  <div class="section-head">
+    <div class="section-badge">٣</div>
+    <div class="section-title">النظام بيتأكد إنها مش مسجّلة قبل كده</div>
+    <div class="section-sub ltr">Check Duplicate</div>
+  </div>
+  <div class="branch-row">
+    <div class="branch-card" style="border-inline-start:3px solid var(--accent);">
+      <div class="branch-head"><span class="branch-icon" style="background:var(--accent);">١</span><div class="branch-title-wrap"><div class="branch-title">عميل جديد تمامًا</div></div></div>
+      <div class="branch-body">مش موجودة — يكمل عادي لتصنيف الذكاء الاصطناعي والتوزيع والتسجيل</div>
+    </div>
+    <div class="branch-card" style="border-inline-start:3px solid var(--brand);">
+      <div class="branch-head"><span class="branch-icon" style="background:var(--brand);">٢</span><div class="branch-title-wrap"><div class="branch-title">نفس الرقم مسجّل بالفعل</div></div></div>
+      <div class="branch-body">بيتحدّث تاريخ آخر تواصل ليها بس — من غير إعادة تصنيف بالـ AI ومن غير تغيير عضو الفريق المعيّن</div>
+    </div>
+  </div>
+  <div class="step-note" style="max-width:600px;">باقة Pro لا تطبّق أرشفة تلقائية (بخلاف Launch/Starter/Growth) لأنها بتستخدم NocoDB بلا حد أقصى مصطنع للسجلات — راجع خطوة قاعدة البيانات تحت.</div>
+
+  <div class="conditions-box" style="background:#fdf7ea;border:1px solid #f0dfb8;margin:26px auto 0;max-width:820px;">
+    <div class="conditions-head">
+      <span class="conditions-icon" style="background:rgba(191,58,0,0.18);border-color:rgba(255,138,92,0.5);color:var(--accent);">!</span>
+      <span class="conditions-title" style="color:var(--brand);">فرق جوهري عن Launch/Starter/Growth — من غير أي اختصار</span>
+    </div>
+    <div class="conditions-body" style="color:var(--ink-soft);">
+      في الباقات التلاتة التانية، أول حاجة بتحصل هي رسالة ترحيب عامة فورية ("أهلاً بيك") قبل أي تصنيف. في باقة <b>Pro تحديدًا، مفيش رسالة ترحيب عامة إطلاقًا</b> — ترتيب الخطوات الفعلي هو: الذكاء الاصطناعي بيحلل رسالة العميل الأصلية <b>أولاً</b> (الخطوة الجاية)، وبعدها بس بيتحدد شكل أول رسالة هيوصلها فعليًا — أولوية، عادية، أو تمهيدية، حسب نتيجة التحليل. يعني العميل مش بياخد أي رد قبل ما النظام يحلل رسالته ويقرر أنسب طريقة يرد بيها عليه.
+    </div>
+  </div>
+</div>
+
+<!-- ===== 4: AI Classification ===== -->
+<div class="section alt reveal">
+  <div class="section-head">
+    <div class="section-badge">٤</div>
+    <div class="section-title">الذكاء الاصطناعي بيحلل نفس الرسالة اللي بعتتها ياسمين ويصنّف نية الشراء</div>
+    <div class="section-sub ltr">AI Classification · gpt-4o-mini</div>
+  </div>
+  <div class="step-wrap">
+    <div class="card ai-mock">
+      <div class="ai-topbar"><div class="ai-icon">✦</div><div><div class="ai-title">تصنيف الذكاء الاصطناعي</div><div class="ai-sub">OpenAI · gpt-4o-mini</div></div></div>
+      <div class="ai-body">
+        <div class="ai-input-label">↩ نفس الرسالة اللي بعتتها ياسمين في الفورم (خطوة ١) — lead_message</div>
+        <div class="ai-input-box">"عايزة أعرف تفاصيل عن الشقق المتاحة والتقسيط، وحابة أحجز معاينة الأسبوع ده لو ممكن"</div>
+        <div class="ai-output-grid">
+          <div class="ai-output-item"><div class="ai-output-label">lead_ai_score</div><div class="ai-output-value score">82 / 100</div></div>
+          <div class="ai-output-item"><div class="ai-output-label">lead_ai_intent</div><div class="ai-output-value">عالية</div></div>
+        </div>
+        <div class="ai-analysis-box"><b>lead_ai_analysis:</b> رسالة تفصيلية بتدل على اهتمام جدي، وطلبت معاينة بتاريخ محدد — مؤشر قوي على نية شراء قريبة.<br><br><b>lead_ai_suggested_action:</b> التواصل الفوري وحجز موعد خلال 24 ساعة.</div>
+      </div>
+    </div>
+  </div>
+  <div class="step-note" style="max-width:700px;">النص جوه رسالة العميل بيتعامل معه دايمًا كبيانات وصفية بس، مش كأوامر — حماية إلزامية ضد محاولات التلاعب بالنموذج (Prompt Injection). ولو الـ AI اتأخر أكتر من 20 ثانية أو فشل، النظام <b>مايوقفش</b>: بيكمّل بدرجة افتراضية آمنة (score = 50, Medium) والحالة دي بتتسجل في الـ Error Log للمراجعة، عشان العميل ميضيعش تحت أي ظرف. النتيجة دي هي اللي هتحدد بعد شوية أنهي رسالة هتوصلها فعليًا كأول تواصل.</div>
+</div>
+
+<!-- ===== 5: Segment + Team + NocoDB registration ===== -->
+<div class="section reveal">
+  <div class="section-head">
+    <div class="section-badge">٥</div>
+    <div class="section-title">بياناتها تتسجل في NocoDB، بعد تصنيف الشريحة والتوزيع على فريق المبيعات</div>
+    <div class="section-sub ltr">DATABASE · لحظيًا</div>
+  </div>
+  <div class="mini-snap">
+    <div class="mini-snap-label">قاعدة البيانات — نفس القاعدة اللي هتتحدث طول الرحلة (NocoDB، مش Airtable)</div>
+    <div class="db-base">
+      <div class="db-base-header noco">
+        <span class="db-base-name ltr">عقارات_النخبة_Pro</span>
+        <span class="db-base-sub ltr">NocoDB Project</span>
+      </div>
+      <div class="at-tabs">
+        <div class="at-tab active">Leads</div>
+        <div class="at-tab">AI_Interactions</div>
+        <div class="at-tab">Custom_Integrations</div>
+        <div class="at-tab">Custom_Dashboards</div>
+        <div class="at-tab">Processed_Events</div>
+        <div class="at-tab">Activity_Log</div>
+        <div class="at-tab">Team_Members</div>
+      </div>
+      <div class="at-grid-wrap">
+        <table class="at-grid wide">
+          <thead><tr>
+            <th>lead_id</th><th>lead_name</th><th>lead_phone</th><th>lead_email</th><th>lead_source</th><th>lead_message</th><th>lead_segment</th><th>lead_ai_score</th><th>lead_ai_intent</th><th>lead_ai_suggested_action</th><th>lead_ai_analysis</th><th>lead_status</th><th>lead_status_previous</th><th>lead_pipeline_stage</th><th>lead_pipeline_stage_previous</th><th>lead_assigned_to</th><th>lead_entry_date</th><th>lead_last_contact</th><th>lead_next_action_date</th><th>lead_deal_value</th><th>lead_channel_history</th><th>lead_replied</th><th>lead_welcome_sent</th><th>lead_followup1_sent</th><th>lead_followup2_sent</th><th>lead_followup3_sent</th><th>lead_custom_field_1/2/3</th><th>lead_notes</th>
+          </tr></thead>
+          <tbody>
+            <tr>
+              <td>1042</td>
+              <td>ياسمين علي</td>
+              <td>01xxxxxxxxx</td>
+              <td>yasmin@example.com</td>
+              <td>Facebook</td>
+              <td>عايزة أعرف تفاصيل عن الشقق...</td>
+              <td class="changed">Social Media Leads</td>
+              <td class="changed-ai">82</td>
+              <td class="changed-ai">عالية</td>
+              <td class="changed-ai">التواصل الفوري وحجز موعد خلال 24 ساعة</td>
+              <td class="changed-ai">اهتمام جدي، طلبت معاينة بتاريخ محدد</td>
+              <td class="changed">جديد</td>
+              <td><span class="at-pill empty">–</span></td>
+              <td class="changed">استقبال جديد</td>
+              <td><span class="at-pill empty">–</span></td>
+              <td class="changed">أحمد</td>
+              <td>15 Aug, 10:41</td>
+              <td><span class="at-pill empty">–</span></td>
+              <td><span class="at-pill empty">–</span></td>
+              <td><span class="at-pill empty">–</span></td>
+              <td class="changed">استقبال أولي · 15 Aug, 10:41</td>
+              <td><span class="chk no">–</span></td>
+              <td><span class="at-pill empty">–</span></td>
+              <td><span class="at-pill empty">–</span></td>
+              <td><span class="at-pill empty">–</span></td>
+              <td><span class="at-pill empty">–</span></td>
+              <td><span class="at-pill empty">–</span></td>
+              <td><span class="at-pill empty">–</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="at-caption">يظهر سجل جديد برقم تعريفي تلقائي <b>lead_id = 1042</b>. نتيجة تحليل الـ AI من الخطوة اللي فاتت اتكتبت كاملة (بالأصفر البنفسجي)، الشريحة اتصنّفت <b>"Social Media Leads"</b> حسب مصدرها، وتوزّعت على <b>أحمد</b> — عضو فريق مبيعات حقيقي، مش اسم عام (التفاصيل في الجدول تحت).</div>
+      <div class="at-caption"><b>lead_channel_history</b> (سجل نقاط التواصل) بيسجل كل نقطة تواصل مع العميل بتاريخها ووقتها، عبر أي قناة كانت (واتساب، إيميل، مكالمة). الفايدة العملية: أي عضو فريق يفتح ملف العميل يعرف فورًا آخر تواصل حصل معاه ومن أنهي قناة، من غير ما يكرر رسالة اتبعتت قبل كده أو يفوّت حاجة.</div>
+    </div>
+
+    <div class="db-base" style="margin-top:14px;">
+      <div class="db-base-header noco">
+        <span class="db-base-name ltr">عقارات_النخبة_Pro</span>
+        <span class="db-base-sub ltr">NocoDB Project</span>
+      </div>
+      <div class="at-tabs">
+        <div class="at-tab">Leads</div>
+        <div class="at-tab">AI_Interactions</div>
+        <div class="at-tab">Custom_Integrations</div>
+        <div class="at-tab">Custom_Dashboards</div>
+        <div class="at-tab">Processed_Events</div>
+        <div class="at-tab">Activity_Log</div>
+        <div class="at-tab active">Team_Members</div>
+      </div>
+      <div class="at-grid-wrap">
+        <table class="at-grid">
+          <thead><tr><th>member_name</th><th>member_phone</th><th>member_email</th><th>member_role</th><th>member_active</th><th>member_leads_count</th><th>member_converted_count</th><th>member_conversion_rate</th></tr></thead>
+          <tbody>
+            <tr><td class="changed">أحمد</td><td>01xxxxxxxxx</td><td class="ltr">ahmed@example.com</td><td>Sales</td><td><span class="chk yes">✓</span></td><td class="changed">18</td><td>3</td><td>17%</td></tr>
+            <tr><td>سارة</td><td>01xxxxxxxxx</td><td class="ltr">sara@example.com</td><td>Sales</td><td><span class="chk yes">✓</span></td><td>19</td><td>4</td><td>21%</td></tr>
+            <tr><td>محمود</td><td>01xxxxxxxxx</td><td class="ltr">mahmoud@example.com</td><td>Sales</td><td><span class="chk yes">✓</span></td><td>19</td><td>3</td><td>16%</td></tr>
+            <tr><td>عمر</td><td>01xxxxxxxxx</td><td class="ltr">omar@example.com</td><td>Senior Sales</td><td><span class="chk yes">✓</span></td><td>–</td><td>–</td><td>–</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="at-caption">جدول أعضاء فريق المبيعات (<b>Team_Members</b>) — عليه بيعتمد النظام في توزيع كل عميل جديد تلقائيًا على العضو الأقل حملاً، عشان التوزيع يفضل عادل بين الفريق كله.</div>
+    </div>
+  </div>
+  <div class="step-note" style="max-width:700px;">مباشرة بعد التسجيل، النظام بيحاول يزامن نفس البيانات مع أي نظام خارجي مربوط (ERP، CRM، محاسبة — حسب أنظمة عميلك تحديدًا). فشل هذه المزامنة الخارجية <b>لا يوقف رحلة العميل أبدًا</b> — بيتحول لطابور إعادة محاولة (حتى 10 محاولات خلال 48 ساعة)، بينما رسائل الترحيب والتنبيهات بتكمل عادي بغض النظر عن حالة النظام الخارجي.</div>
+</div>
+
+<!-- ===== 6: Route by AI score — 3 way fork ===== -->
+<div class="section alt reveal">
+  <div class="section-head">
+    <div class="section-badge">٦</div>
+    <div class="section-title">النظام بيوجّه العميل لمسار مختلف حسب درجة الذكاء الاصطناعي</div>
+    <div class="section-sub ltr">Route by AI Score</div>
+  </div>
+
+  <div class="branch-row stacked">
+
+    <!-- HIGH -->
+    <div class="branch-card fork-card" style="border-inline-start:3px solid var(--err);">
+      <div class="branch-head">
+        <span class="fork-icon" style="background:var(--err);">🔴</span>
+        <div class="branch-title-wrap">
+          <div class="branch-title">High Intent (70–100) — حالة ياسمين بالظبط (82)</div>
+        </div>
+      </div>
+      <div class="step-wrap" style="margin-top:10px;">
+        <div class="card wa-mock" style="max-width:230px;">
+          <div class="wa-topbar"><div class="wa-avatar">ن</div><div><div class="wa-name">عقارات النخبة</div><div class="wa-status">آخر ظهور الآن</div></div></div>
+          <div class="wa-body" style="min-height:auto;padding:12px 10px;">
+            <div class="wa-bubble">أهلاً ياسمين 👋<br>شكراً لاهتمامك بعقارات النخبة.<br>لاحظنا إنك مهتم بشكل كبير — هل تسمح نحدد موعد مكالمة سريعة؟<br><br>[رابط حجز موعد مباشر]
+              <div class="wa-time ltr">10:41 <span class="tick">✓✓</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="card email-mock" style="max-width:230px;">
+          <div class="email-topbar"><div class="email-icon">✉</div><div><div class="email-from">عقارات النخبة</div><div class="email-to ltr">to: yasmin@example.com</div></div></div>
+          <div class="email-body">
+            <div class="email-subject">شكراً لاهتمامك بعقارات النخبة — فريقنا هيتواصل معاك قريب</div>
+            <div class="email-text">أهلاً ياسمين،
+
+شكراً لتواصلك معانا. لاحظنا اهتمامك الكبير، وعشان كده هنتواصل معاك خلال 30 دقيقة على أبعد تقدير.
+
+في الأثناء، تقدر تحجز مكالمة مباشرة من هنا: [رابط حجز موعد]</div>
+            <div class="email-time ltr">10:41 AM</div>
+          </div>
+        </div>
+        <div class="card wa-mock" style="max-width:230px;">
+          <div class="wa-topbar"><div class="wa-avatar">ع</div><div><div class="wa-name">تنبيه فريق كبار المبيعات</div><div class="wa-status">إلى: عمر (Senior Sales)</div></div></div>
+          <div class="wa-body" style="min-height:auto;padding:12px 10px;">
+            <div class="wa-bubble admin">🔴 عميل أولوية عالية!<br>الاسم: ياسمين علي<br>الرقم: 01xxxxxxxxx<br>المصدر: Facebook<br>درجة الـ AI: 82/100<br>تحليل الـ AI: اهتمام جدي، طلبت معاينة بتاريخ محدد<br>الإجراء المقترح: التواصل الفوري وحجز موعد خلال 24 ساعة<br><br>يرجى التواصل خلال 30 دقيقة.
+              <div class="wa-time ltr">10:41 <span class="tick">✓✓</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="branch-body" style="margin-top:10px;text-align:center;">رسالة أولوية على القناتين معًا + تنبيه فوري لكبير فريق المبيعات — أعلى درجة استجابة في النظام كله.</div>
+    </div>
+
+    <!-- MEDIUM -->
+    <div class="branch-card fork-card" style="border-inline-start:3px solid #a05a15;">
+      <div class="branch-head">
+        <span class="fork-icon" style="background:#a05a15;">🟡</span>
+        <div class="branch-title-wrap">
+          <div class="branch-title">Medium Intent (40–69)</div>
+        </div>
+      </div>
+      <div class="step-wrap" style="margin-top:10px;">
+        <div class="card wa-mock" style="max-width:230px;">
+          <div class="wa-topbar"><div class="wa-avatar">ن</div><div><div class="wa-name">عقارات النخبة</div><div class="wa-status">آخر ظهور الآن</div></div></div>
+          <div class="wa-body" style="min-height:auto;padding:12px 10px;">
+            <div class="wa-bubble">أهلاً {{lead_name}} 👋<br>شكراً لتواصلك مع عقارات النخبة.<br>هنرد عليك في أقرب وقت ممكن. تقدر كمان تطلع على [رابط مفيد] لحد ما نتواصل معاك.
+              <div class="wa-time ltr">10:41 <span class="tick">✓✓</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="card email-mock" style="max-width:230px;">
+          <div class="email-topbar"><div class="email-icon">✉</div><div><div class="email-from">عقارات النخبة</div><div class="email-to ltr">to: —</div></div></div>
+          <div class="email-body">
+            <div class="email-subject">شكراً لتواصلك مع عقارات النخبة</div>
+            <div class="email-text">أهلاً {{lead_name}}،
+
+استلمنا طلبك وهنتواصل معاك قريب. لو عندك أي سؤال في الأثناء، رد على الإيميل ده مباشرة.</div>
+            <div class="email-time ltr">10:41 AM</div>
+          </div>
+        </div>
+      </div>
+      <div class="branch-body" style="margin-top:10px;text-align:center;">ترحيب قياسي على القناتين، ثم نفس تسلسل المتابعة الثلاثي (24 ساعة → 48 ساعة → 72 ساعة، واتساب وإيميل معًا في كل مرة، برد على أي قناة بيوقف الباقي) الموضّح بالتفصيل في باقة Growth — بنفس الآلية والنصوص بالحرف.</div>
+    </div>
+
+    <!-- LOW -->
+    <div class="branch-card fork-card" style="border-inline-start:3px solid var(--success);">
+      <div class="branch-head">
+        <span class="fork-icon" style="background:var(--success);">🟢</span>
+        <div class="branch-title-wrap">
+          <div class="branch-title">Low Intent (0–39)</div>
+        </div>
+      </div>
+      <div class="step-wrap" style="margin-top:10px;">
+        <div class="card wa-mock" style="max-width:260px;">
+          <div class="wa-topbar"><div class="wa-avatar">ن</div><div><div class="wa-name">عقارات النخبة</div><div class="wa-status">آخر ظهور الآن</div></div></div>
+          <div class="wa-body" style="min-height:auto;padding:12px 10px;">
+            <div class="wa-bubble">رسالة تمهيدية غير بيعية — بترحّب بالعميل من غير ضغط مباشر للشراء
+              <div class="wa-time ltr">10:41 <span class="tick">✓✓</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="branch-body" style="margin-top:10px;text-align:center;"><b>lead_pipeline_stage</b> بتتحدّث إلى <b>"Nurture Sequence"</b> و<b>lead_next_action_date</b> لبعد 7 أيام — العميل بيدخل تسلسل تعليمي أسبوعي طويل المدى (مش بيعي مباشر) لمدة شهر، هدفه رفع درجة الاهتمام تدريجيًا قبل أي محاولة بيع مباشرة.</div>
+    </div>
+
+  </div>
+  <div class="step-note" style="max-width:720px;">الثلاثة مسارات بتتقابل في نفس النقطة بعد كده: تسجيل التفاعل في جدول <b>AI_Interactions</b> المنفصل، تحديث اللوحات التحليلية المخصصة، ثم توثيق الحدث في سجل النشاط.</div>
+</div>
+
+<!-- ===== 7: AI_Interactions + custom dashboards ===== -->
+<div class="section reveal">
+  <div class="section-head">
+    <div class="section-badge">٧</div>
+    <div class="section-title">كل قرار للذكاء الاصطناعي بيتوثّق لوحده، لمراجعته وتحسينه لاحقًا</div>
+    <div class="section-sub ltr">AI_Interactions · Custom_Dashboards</div>
+  </div>
+  <div class="mini-snap">
+    <div class="db-base">
+      <div class="db-base-header noco">
+        <span class="db-base-name ltr">عقارات_النخبة_Pro</span>
+        <span class="db-base-sub ltr">NocoDB Project</span>
+      </div>
+      <div class="at-tabs">
+        <div class="at-tab">Leads</div>
+        <div class="at-tab active">AI_Interactions</div>
+        <div class="at-tab">Custom_Integrations</div>
+        <div class="at-tab">Custom_Dashboards</div>
+        <div class="at-tab">Processed_Events</div>
+        <div class="at-tab">Activity_Log</div>
+        <div class="at-tab">Team_Members</div>
+      </div>
+      <div class="at-grid-wrap">
+        <table class="at-grid">
+          <thead><tr><th>interaction_id</th><th>interaction_lead</th><th>interaction_date</th><th>interaction_channel</th><th>interaction_message</th><th>ai_analysis</th><th>ai_score</th><th>ai_action_taken</th></tr></thead>
+          <tbody>
+            <tr><td class="changed">3301</td><td>ياسمين علي</td><td>15 Aug, 10:41</td><td>System</td><td>عايزة أعرف تفاصيل عن الشقق...</td><td>اهتمام جدي، طلبت معاينة بتاريخ محدد</td><td>82</td><td>التواصل الفوري وحجز موعد خلال 24 ساعة</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="at-caption">سطر منفصل بيوثّق قرار الـ AI بالكامل — <b>interaction_channel</b> هنا "System" لأن الحدث ده تصنيف تلقائي من الذكاء الاصطناعي وقت دخول العميل، مش تواصل مباشر عبر واتساب أو إيميل. الهدف مراجعة دورية شهرية لعينة من هذه السجلات، خصوصًا الدرجات غير المنطقية (100 مفاجئة، أو رسالة قصيرة جدًا بدرجة عالية جدًا)، كمؤشر مبكر على أي محاولة تلاعب بالنظام.</div>
+    </div>
+  </div>
+  <div class="step-note" style="max-width:680px;">جدول <b>Custom_Dashboards</b> بيتحدّث بنفس اللحظة — اللوحات التحليلية المخصصة بتتصمم مع كل عميل Pro حسب طبيعة نشاطه ومؤشراته الخاصة.</div>
+</div>
+
+<!-- ===== 8: closing ===== -->
+<div class="section alt reveal">
+  <div class="section-head">
+    <div class="section-badge">٨</div>
+    <div class="section-title">عمر (كبير المبيعات) أقنعها، والصفقة اتقفلت — إزاي النظام بيعرف؟</div>
+    <div class="section-sub ltr">Deal Closed</div>
+  </div>
+  <div class="close-wrap">
+    <div class="card wa-mock close-wa">
+      <div class="wa-topbar"><div class="wa-avatar">ع</div><div><div class="wa-name">عمر</div><div class="wa-status ltr">Senior Sales — Business Number</div></div></div>
+      <div class="wa-body">
+        <div class="wa-bubble admin">تم البيع - 01xxxxxxxxx - 950000
+          <div class="wa-time ltr">14:02 <span class="tick">✓✓</span></div>
+        </div>
+        <div class="wa-bubble" style="margin-top:8px;background:#fff;">✅ تم تحديث حالة ياسمين علي — 01xxxxxxxxx إلى: تم الإغلاق
+          <div class="wa-time ltr">14:02 <span class="tick">✓✓</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="close-side">
+      <span class="close-badge">✓ من نفس رقم واتساب عضو الفريق</span>
+      <div class="close-title">رسالة واحدة تكفي لإغلاق الصفقة وتسجيل قيمتها</div>
+      <div class="close-body">أي عضو فريق نشط مسجَّل مسبقًا يقدر يرسل هذا الأمر من رقمه. في باقة Pro تحديدًا، الصيغة الموسّعة الاختيارية بتسمح بتسجيل قيمة الصفقة مباشرة ("تم البيع - الرقم - القيمة") — لو اتسابت، الفيلد بيفضل فاضي ويتحدّث يدويًا لاحقًا من NocoDB.</div>
+    </div>
+  </div>
+  <div class="mini-snap" style="margin-top:22px;">
+    <div class="db-base">
+      <div class="db-base-header noco">
+        <span class="db-base-name ltr">عقارات_النخبة_Pro</span>
+        <span class="db-base-sub ltr">NocoDB Project</span>
+      </div>
+      <div class="at-tabs">
+        <div class="at-tab active">Leads</div>
+        <div class="at-tab">AI_Interactions</div>
+        <div class="at-tab">Custom_Integrations</div>
+        <div class="at-tab">Custom_Dashboards</div>
+        <div class="at-tab">Processed_Events</div>
+        <div class="at-tab">Activity_Log</div>
+        <div class="at-tab">Team_Members</div>
+      </div>
+      <div class="at-grid-wrap">
+        <table class="at-grid wide">
+          <thead><tr>
+            <th>lead_id</th><th>lead_name</th><th>lead_phone</th><th>lead_email</th><th>lead_source</th><th>lead_message</th><th>lead_segment</th><th>lead_ai_score</th><th>lead_ai_intent</th><th>lead_ai_suggested_action</th><th>lead_ai_analysis</th><th>lead_status</th><th>lead_status_previous</th><th>lead_pipeline_stage</th><th>lead_pipeline_stage_previous</th><th>lead_assigned_to</th><th>lead_entry_date</th><th>lead_last_contact</th><th>lead_next_action_date</th><th>lead_deal_value</th><th>lead_channel_history</th><th>lead_replied</th><th>lead_welcome_sent</th><th>lead_followup1_sent</th><th>lead_followup2_sent</th><th>lead_followup3_sent</th><th>lead_custom_field_1/2/3</th><th>lead_notes</th>
+          </tr></thead>
+          <tbody>
+            <tr>
+              <td>1042</td><td>ياسمين علي</td><td>01xxxxxxxxx</td><td>yasmin@example.com</td><td>Facebook</td><td>عايزة أعرف تفاصيل عن الشقق...</td><td>Social Media Leads</td><td>82</td><td>عالية</td><td>التواصل الفوري وحجز موعد خلال 24 ساعة</td><td>اهتمام جدي، طلبت معاينة بتاريخ محدد</td>
+              <td class="changed">تم الإغلاق</td>
+              <td class="changed">جديد</td>
+              <td class="changed">عميل فعلي</td><td class="changed">استقبال جديد</td><td>أحمد</td><td>15 Aug, 10:41</td><td>15 Aug, 10:41</td><td>–</td>
+              <td class="changed">950,000 ج.م</td>
+              <td>استقبال أولي · 15 Aug, 10:41</td>
+              <td class="changed"><span class="chk yes">✓</span></td><td><span class="at-pill delivered">delivered</span></td><td><span class="at-pill empty">–</span></td><td><span class="at-pill empty">–</span></td><td><span class="at-pill empty">–</span></td><td><span class="at-pill empty">–</span></td><td><span class="at-pill empty">–</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="at-caption"><b>lead_status</b> يتحدّث إلى <b>"تم الإغلاق"</b>، وتُحفظ الحالة السابقة في <b>lead_status_previous</b>، ويُسجَّل <b>lead_deal_value</b>. في نفس اللحظة تُحفظ مرحلتها الحالية في <b>lead_pipeline_stage_previous</b>، وتنتقل <b>lead_pipeline_stage</b> لآخر مرحلة معرَّفة ("عميل فعلي" في المثال الافتراضي)، ويتحدّث <b>lead_replied</b> إلى صح — حفظ القيم القديمة هو اللي بيخلي أمر "تراجع" قادر يرجّعها بدقة لو استُخدم بالغلط. <b>lead_assigned_to</b> ما بيتغيرش — بيفضل نفس عضو الفريق اللي اتوزع عليه العميل من الأول (أحمد)، حتى لو عمر هو اللي بعت أمر الإغلاق.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 9: undo / تراجع ===== -->
+<div class="section reveal">
+  <div class="section-head">
+    <div class="section-badge">٩</div>
+    <div class="section-title">حصل غلط في تسجيل الصفقة؟ رسالة واحدة تلغيها</div>
+    <div class="section-sub ltr">Undo — خلال 24 ساعة من الإغلاق</div>
+  </div>
+  <div class="close-wrap">
+    <div class="card wa-mock close-wa">
+      <div class="wa-topbar"><div class="wa-avatar">ع</div><div><div class="wa-name">عمر</div><div class="wa-status ltr">Senior Sales — Business Number</div></div></div>
+      <div class="wa-body">
+        <div class="wa-bubble admin">تراجع - 01xxxxxxxxx
+          <div class="wa-time ltr">14:15 <span class="tick">✓✓</span></div>
+        </div>
+        <div class="wa-bubble" style="margin-top:8px;background:#fff;">↩️ تم التراجع — حالة ياسمين علي رجعت لـ: جديد
+          <div class="wa-time ltr">14:15 <span class="tick">✓✓</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="close-side">
+      <span class="close-badge">✓ من نفس رقم واتساب عضو الفريق</span>
+      <div class="close-title">لو حصل خطأ بسيط، رسالة "تراجع" ترجّع الحالة زي ما كانت بالظبط</div>
+      <div class="close-body">أي عضو فريق نشط يقدر يرسل "تراجع - [رقم تليفون العميل]" من رقمه، وحالة العميل بترجع فورًا لآخر حالة كانت عليها قبل تسجيل "تم البيع" — من غير ما يحتاج يدخل على النظام أو يطلب من حد يعدلها له. بنفس الطريقة، ترجع <code>lead_pipeline_stage</code> لمرحلتها قبل الإغلاق، ويتفرّغ <code>lead_conversion_date</code> و<code>lead_deal_value</code> بالكامل — عشان التقارير متفضلش شايفة الصفقة "محوَّلة" أو ليها قيمة مالية رغم إنها اترجع عنها. الميزة دي متاحة خلال أول 24 ساعة من وقت تسجيل الصفقة. بعد الـ24 ساعة، التراجع بيحتاج تواصل مباشر مع فريق Sartevo.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 10: manual override ===== -->
+<div class="section alt reveal">
+  <div class="section-head">
+    <div class="section-badge">١٠</div>
+    <div class="section-title">لو قناة الإرسال الآلي حصلها عطل، الفريق يقدر يتواصل يدوي والنظام يوقف التكرار</div>
+    <div class="section-sub ltr">Manual Override</div>
+  </div>
+  <div class="close-wrap">
+    <div class="card wa-mock close-wa">
+      <div class="wa-topbar"><div class="wa-avatar">س</div><div><div class="wa-name">سارة</div><div class="wa-status ltr">Sales — Business Number</div></div></div>
+      <div class="wa-body">
+        <div class="wa-bubble admin">تم التواصل يدوي - 01xxxxxxxxx
+          <div class="wa-time ltr">16:30 <span class="tick">✓✓</span></div>
+        </div>
+        <div class="wa-bubble" style="margin-top:8px;background:#fff;">✅ تم تسجيل تواصل يدوي مع ياسمين علي — الأتمتة المعلّقة اتوقفت لهذا العميل
+          <div class="wa-time ltr">16:30 <span class="tick">✓✓</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="close-side">
+      <span class="close-badge">✓ حماية من التكرار</span>
+      <div class="close-title">لو عضو الفريق كلّم العميل بنفسه، النظام يوقف أي رسالة آلية معلّقة له فورًا</div>
+      <div class="close-body">في أي حالة استثنائية (زي عطل مؤقت في قناة الإرسال الآلي)، عضو الفريق يقدر يكلّم العميل بنفسه، وبعدين يبعت للنظام "تم التواصل يدوي - [رقم تليفون العميل]" من رقمه. النظام بيوقف على طول أي رسالة ترحيب أو متابعة كانت لسه مجدولة لنفس العميل، عشان العميل ميوصلوش رسايل مكررة أو متضاربة بعد ما اتكلم مع الفريق فعلاً.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 11: weekly re-classification ===== -->
+<div class="section reveal">
+  <div class="section-head">
+    <div class="section-badge">١١</div>
+    <div class="section-title">مفيش عميل بيضيع — لو حد بدأ يتفاعل بعد ما بان مش متحمس، النظام يمسكه ويرفع أولويته</div>
+    <div class="section-sub ltr">مراجعة أسبوعية تلقائية · كل يوم أحد الساعة 6 صباحًا</div>
+  </div>
+  <div class="branch-row">
+
+    <div class="branch-card" style="border-inline-start:3px solid var(--ai);max-width:420px;">
+      <div class="branch-head"><span class="branch-icon" style="background:var(--ai);">↻</span><div class="branch-title-wrap"><div class="branch-title">متابعة العملاء غير المتحمسين بمحتوى مفيد</div></div></div>
+      <div class="branch-body">العملاء اللي بانوا مش متحمسين من أول رسالة، بياخدوا محتوى تعليمي مفيد (مش رسايل بيع مباشرة) أسبوعيًا لمدة شهر كامل، عشان يقرّبهم من القرار بدون ضغط.</div>
+    </div>
+    <div class="branch-card" style="border-inline-start:3px solid var(--ai);max-width:420px;">
+      <div class="branch-head"><span class="branch-icon" style="background:var(--ai);">↻</span><div class="branch-title-wrap"><div class="branch-title">إعادة تقييم كل عميل تلقائيًا</div></div></div>
+      <div class="branch-body">كل يوم أحد، النظام بيراجع كل عميل بان مش متحمس ويشوف هل حصل أي تفاعل جديد منه (رد، تواصل) من وقت التصنيف الأخير. لو حصل، بيعيد تقييمه فورًا — ولو اهتمامه زاد فعلًا، بيترقّى تلقائيًا لأولوية متوسطة أو عالية، وفريق المبيعات ياخد تنبيه يتابعه بجدية.</div>
+    </div>
+  </div>
+  <div class="step-note" style="max-width:700px;">إضافة لكده، النظام بيزامن كل ساعة مع أنظمتك الخارجية (ERP، CRM، محاسبة)، وبيبعتلك تقارير مخصصة بالكامل حسب طبيعة نشاطك وبالجدول اللي تحددوه مع Sartevo.</div>
+</div>
+
+<!-- ===== 10: backup ===== -->
+
+<div class="section alt reveal">
+  <div class="section-head">
+    <div class="section-badge">١٢</div>
+    <div class="section-title">نسخة احتياطية يومية على مكانين مختلفين</div>
+    <div class="section-sub ltr">Daily Backup — 1:00 AM</div>
+  </div>
+  <div class="card gs-mock">
+    <div class="gs-topbar"><div class="gs-icon">G</div><div class="gs-name">عقارات_النخبة_Backup</div></div>
+    <div class="gs-tabs">
+      <div class="gs-tab active">Leads</div>
+      <div class="gs-tab">AI_Interactions</div>
+      <div class="gs-tab">Custom_Integrations</div>
+      <div class="gs-tab">Custom_Dashboards</div>
+      <div class="gs-tab">Processed_Events</div>
+      <div class="gs-tab">Activity_Log</div>
+      <div class="gs-tab">Team_Members</div>
+    </div>
+    <table class="gs-table">
+      <thead><tr><th class="ltr">lead_name</th><th class="ltr">lead_phone</th><th class="ltr">lead_source</th><th class="ltr">lead_status</th></tr></thead>
+      <tbody>
+        <tr><td>محمد سيد</td><td class="ltr">01xxxxxxxxx</td><td>فيسبوك</td><td>تم التواصل</td></tr>
+        <tr><td>ياسمين علي</td><td class="ltr">01xxxxxxxxx</td><td>فيسبوك</td><td>تم الإغلاق</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="gs-schedule">🕑 <span>كل يوم الساعة 1 صباحًا — نسخة كاملة على Google Drive (نسخة كاملة) + Google Sheets (Sheet منفصل لكل جدول من السبعة)، مع تحقق تلقائي إن السبعة جداول كلهم موجودين فعلاً في النسخة</span></div>
+  <div class="step-note" style="max-width:640px;">أقصى فقدان بيانات محتمل (RPO) = 24 ساعة، وهو حد معلن ومقبول — لعملاء بحجم استثنائي، إمكانية ضمانة أدق (Point-in-time recovery) بتتقيّم كقرار منفصل وقت التسليم.</div>
+</div>
+
+<div class="matters reveal">
+  <div class="matter-card"><div class="matter-num ltr">∞</div><div class="matter-label">عميل محتمل شهريًا — بلا حد أقصى</div></div>
+  <div class="matter-card"><div class="matter-num ltr">AI</div><div class="matter-label">تصنيف تلقائي لنية الشراء لكل عميل</div></div>
+  <div class="matter-card"><div class="matter-num ltr">3</div><div class="matter-label">مسارات استجابة مختلفة حسب الأولوية</div></div>
+  <div class="matter-card"><div class="matter-num ltr">2</div><div class="matter-label">عميل كحد أقصى لكل سيرفر — عزل كامل</div></div>
+</div>
+
+<div class="purpose reveal">
+  <div class="purpose-inner">
+    <div class="purpose-title">هدف النظام باختصار</div>
+    <div class="purpose-sub">لا يُعد Pro أداة بيع بديلة، بل الطبقة الذكية التي تضمن معاملة كل فرصة بيع حسب قيمتها الحقيقية، وربط كل أنظمة عملك في منظومة واحدة</div>
+    <div class="purpose-grid">
+      <div class="purpose-card">
+        <div class="purpose-num">01</div>
+        <div class="purpose-card-title">لا يُعامَل كل عميل بنفس الأولوية</div>
+        <div class="purpose-card-body">الذكاء الاصطناعي بيقرأ نية كل عميل فعليًا من رسالته، ويوجّهه لمسار الاستجابة المناسب — عاجل، عادي، أو تمهيدي طويل المدى</div>
+      </div>
+      <div class="purpose-card">
+        <div class="purpose-num">02</div>
+        <div class="purpose-card-title">لا فرصة تُفقد بسبب فشل نظام واحد</div>
+        <div class="purpose-card-body">مزامنة الأنظمة الخارجية، فشل الذكاء الاصطناعي نفسه، أو أي عطل جزئي — كل ده مصمم عشان مايوقفش رحلة العميل الأساسية أبدًا</div>
+      </div>
+      <div class="purpose-card">
+        <div class="purpose-num">03</div>
+        <div class="purpose-card-title">لا قرار بيُتّخذ من غير مراجعة وتحسين مستمر</div>
+        <div class="purpose-card-body">كل قرار للذكاء الاصطناعي موثّق لوحده في سجل منفصل — عشان تراجعه وتتأكد إنه بيتحسن مع الوقت، مش بيتصرف في الضلام</div>
+      </div>
+    </div>
+    <div class="purpose-note">
+      يضمن النظام تحوّل <b>كل فرصة</b>، مهما كان حجمها أو مصدرها، إلى محادثة فعلية بالأولوية الصحيحة — أما تحويل هذه المحادثة إلى صفقة فهو دور <b>فريق المبيعات</b>.<br>
+      يوفّر Pro الأساس التقني والذكي اللازم، بينما يبقى بناء الثقة وإقناع العميل مسؤولية القائمين على التواصل معه مباشرة.
+    </div>
+    <div class="conditions-box">
+      <div class="conditions-head">
+        <span class="conditions-icon">i</span>
+        <span class="conditions-title">شروط تحقيق هذا الأداء</span>
+      </div>
+      <div class="conditions-body">
+        الأداء الموضّح في هذا العرض يعكس عمل النظام عند إعداده وضبطه بالشكل الصحيح، مع ربط الأنظمة الخارجية الفعلية لنشاطك، وضبط الـ System Prompt وحد الإنفاق الشهري لحساب OpenAI، وتحديد حالات lead_status ومراحل الـ Pipeline والحقول المخصصة مع العميل قبل البناء. يضمن نظام Pro استقبال كل عميل محتمل وتصنيفه بالأولوية الصحيحة وتوجيهه للمسار المناسب. أما النتائج التجارية النهائية فتتأثر أيضًا بعوامل خارج نطاق النظام، أبرزها جودة الحملات الإعلانية التي تجلب العملاء، وكفاءة فريق المبيعات في التعامل مع كل عميل بعد وصوله — الذكاء الاصطناعي بيرشّح الأولوية، لكنه لا يحل محل مهارة الإقناع البشرية.
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="demo-footer">
+  <div class="tag">هذا نموذج توضيحي ببيانات تجريبية — يوضح آلية عمل النظام الفعلية لباقة <bdi class="ltr en">Pro</bdi> حرفيًا</div>
+</div>
+
+<script>
+if('IntersectionObserver' in window){
+  const els=document.querySelectorAll('.reveal');
+  const io=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  },{threshold:0.12});
+  els.forEach(el=>io.observe(el));
+}else{
+  document.querySelectorAll('.reveal').forEach(el=>el.classList.add('in'));
+}
+</script>
+
+</body>
+</html>
