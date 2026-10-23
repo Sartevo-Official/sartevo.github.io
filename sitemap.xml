@@ -4,25 +4,27 @@
 
   <url>
     <loc>https://sartevo.com/</loc>
-    <lastmod>2026-09-06</lastmod>
+    <lastmod>2026-10-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://sartevo.com/" />
     <xhtml:link rel="alternate" hreflang="ar" href="https://sartevo.com/index-ar.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sartevo.com/" />
   </url>
 
   <url>
     <loc>https://sartevo.com/index-ar.html</loc>
-    <lastmod>2026-09-06</lastmod>
+    <lastmod>2026-10-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://sartevo.com/" />
     <xhtml:link rel="alternate" hreflang="ar" href="https://sartevo.com/index-ar.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sartevo.com/" />
   </url>
 
   <url>
     <loc>https://sartevo.com/privacy.html</loc>
-    <lastmod>2026-09-06</lastmod>
+    <lastmod>2026-10-23</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://sartevo.com/privacy.html" />
@@ -31,7 +33,7 @@
 
   <url>
     <loc>https://sartevo.com/privacy-ar.html</loc>
-    <lastmod>2026-09-06</lastmod>
+    <lastmod>2026-10-23</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://sartevo.com/privacy.html" />
@@ -40,7 +42,7 @@
 
   <url>
     <loc>https://sartevo.com/terms.html</loc>
-    <lastmod>2026-09-06</lastmod>
+    <lastmod>2026-10-23</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://sartevo.com/terms.html" />
@@ -49,7 +51,7 @@
 
   <url>
     <loc>https://sartevo.com/terms-ar.html</loc>
-    <lastmod>2026-09-06</lastmod>
+    <lastmod>2026-10-23</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://sartevo.com/terms.html" />
